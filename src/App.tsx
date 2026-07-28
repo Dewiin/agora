@@ -1,14 +1,17 @@
-import { useState } from 'react'
-
+import { Routes, Route } from 'react-router'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+// components
+import { AppLayout } from '@/components/screens/AppLayout/AppLayout'
+import { HomeScreen } from '@/components/screens/HomeScreen/HomeScreen'
 
+function App() {
   return (
-    <>
-        
-    </>
+    <Routes>
+      <Route element={<AppLayout />}>
+        <Route index element={<HomeScreen />} />
+      </Route>
+    </Routes>
   )
 }
 
