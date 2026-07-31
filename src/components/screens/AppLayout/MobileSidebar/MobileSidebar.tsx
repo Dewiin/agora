@@ -36,11 +36,6 @@ const navigationMenu = [
 export function MobileSidebar() {
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location);
-    useEffect(() => {
-        const pathname = location.pathname;
-
-    }, [location]);
 
     return (
         <div
