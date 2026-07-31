@@ -9,7 +9,7 @@ function App() {
   return (
     <Routes>
       <Route element={<AppLayout />}>
-        <Route index element={<HomeScreen />} />
+        <Route path='/*' element={<HomeScreen />} />
       </Route>
     </Routes>
   )

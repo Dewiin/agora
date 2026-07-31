@@ -1,8 +1,7 @@
 import { Outlet } from "react-router"
 
 // components
-import { MobileLeftSidebar } from "./MobileSidebar/MobileLeftSidebar"
-import { MobileRightSidebar } from "./MobileSidebar/MobileRightSidebar"
+import { MobileSidebar } from "./MobileSidebar/MobileSidebar"
 import { LeftSidebar } from "./Sidebar/LeftSidebar"
 import { RightSidebar } from "./Sidebar/RightSidebar"
 
@@ -14,11 +13,11 @@ export function AppLayout() {
 
     return (
         <div
-        className="w-full h-screen flex"
+        className={`w-full h-screen flex ${isMobile && "flex-col"}`}
         >
-            {isMobile ? <MobileLeftSidebar /> : <LeftSidebar />}
+            {!isMobile && <LeftSidebar />}
             <Outlet />
-            {isMobile ? <MobileRightSidebar /> : <RightSidebar />}
+            {isMobile ? <MobileSidebar /> : <RightSidebar />}
         </div>
     )
 }
