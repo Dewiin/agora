@@ -1,14 +1,113 @@
-import { useNavigate } from "react-router"
+import { useNavigate, useLocation } from "react-router"
+import logo from "@/assets/agora_logo.svg"
+
+// components
+import { Button } from "@/components/ui/button";
+import {
+    Avatar,
+    AvatarImage,
+    AvatarFallback
+} from "@/components/ui/avatar";
+
+// icons
+import { 
+    House,
+    Search,
+    Bell,
+    MessageCircle,
+    Bookmark, 
+    UserRound,
+    Settings
+} from "lucide-react";
+
+const navigationMenu = [
+    {
+        "path": "/",
+        "icon": <House size={28} />,
+        "name": "Home"
+    },
+    {
+        "path": "/search",
+        "icon": <Search size={28} />,
+        "name": "Search"
+    },
+    {
+        "path": "/notifications",
+        "icon": <Bell size={28} />,
+        "name": "Notifications"
+    },
+    {
+        "path": "/messages",
+        "icon": <MessageCircle size={28} />,
+        "name": "Messages"
+    },
+    {
+        "path": "/bookmarks",
+        "icon": <Bookmark size={28} />,
+        "name": "Bookmarks"
+    },
+    {
+        "path": "/profile",
+        "icon": <UserRound size={28} />,
+        "name": "Profile"
+    },
+    {
+        "path": "/settings",
+        "icon": <Settings size={28} />,
+        "name": "Settings"
+    },
+]
 
 export function LeftSidebar() {
     const navigate = useNavigate();
+    const location = useLocation();
 
     return (
         <div 
-        className="w-2xs"
+        className="w-2xs flex flex-col justify-between p-4"
         >
+            <div
+            className="flex flex-col gap-12 text-xl"
+            >
+                <img 
+                src={logo} 
+                width={36} 
+                className="cursor-pointer"
+                onClick={() => navigate("/")} 
+                />
+                
+                <div className="flex flex-col gap-2">
+                {navigationMenu.map(({path, icon, name}) => (
+                    <div
+                    className={`${location.pathname === path && "bg-accent"}
+                    flex gap-4 items-center cursor-pointer
+                    p-4 rounded-full 
+                    hover:bg-accent duration-150`}
+                    onClick={() => navigate(path)}
+                    >
+                        {icon}
+                        <p>{name}</p>
+                    </div>
+                ))}
+                </div>
 
-        
+                <Button className="rounded-full py-6 cursor-pointer font-semibold">
+                    Post
+                </Button>
+            </div>
+            
+            <div className="flex gap-2 cursor-pointer
+            p-4 rounded-full 
+            hover:bg-accent duration-150 ">
+                <Avatar size="lg">
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div>
+                    <p className="font-semibold">Devin Xie</p>
+                    <p className="text-ring text-sm">@dewiin</p>
+                </div>
+            </div>
         </div>
     )
 }

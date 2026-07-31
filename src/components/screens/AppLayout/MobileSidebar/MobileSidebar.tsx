@@ -8,7 +8,6 @@ import {
     Bell,
     UserRound,
 } from "lucide-react"
-import { useEffect } from "react";
 
 const navigationMenu = [
     {
@@ -38,9 +37,7 @@ export function MobileSidebar() {
     const location = useLocation();
 
     return (
-        <div
-        className="flex"
-        >
+        <div className="flex">
             {navigationMenu.map(({path, icon}) => (
                 <div 
                 className={`${location.pathname === path && "bg-accent"} 
