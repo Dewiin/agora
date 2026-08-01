@@ -23,37 +23,37 @@ import {
 const navigationMenu = [
     {
         "path": "/",
-        "icon": <House size={28} />,
+        "icon": <House />,
         "name": "Home"
     },
     {
         "path": "/search",
-        "icon": <Search size={28} />,
+        "icon": <Search />,
         "name": "Search"
     },
     {
         "path": "/notifications",
-        "icon": <Bell size={28} />,
+        "icon": <Bell />,
         "name": "Notifications"
     },
     {
         "path": "/messages",
-        "icon": <MessageCircle size={28} />,
+        "icon": <MessageCircle />,
         "name": "Messages"
     },
     {
         "path": "/bookmarks",
-        "icon": <Bookmark size={28} />,
+        "icon": <Bookmark />,
         "name": "Bookmarks"
     },
     {
         "path": "/profile",
-        "icon": <UserRound size={28} />,
+        "icon": <UserRound />,
         "name": "Profile"
     },
     {
         "path": "/settings",
-        "icon": <Settings size={28} />,
+        "icon": <Settings />,
         "name": "Settings"
     },
 ]
@@ -67,7 +67,7 @@ export function LeftSidebar() {
         className="w-2xs flex flex-col justify-between p-4"
         >
             <div
-            className="flex flex-col gap-12 text-xl"
+            className="flex flex-col gap-12 text-lg"
             >
                 <img 
                 src={logo} 
@@ -79,7 +79,7 @@ export function LeftSidebar() {
                 <div className="flex flex-col gap-2">
                 {navigationMenu.map(({path, icon, name}) => (
                     <div
-                    className={`${location.pathname === path && "bg-accent"}
+                    className={`${location.pathname === path && "bg-accent font-semibold"}
                     flex gap-4 items-center cursor-pointer
                     p-4 rounded-full 
                     hover:bg-accent duration-150`}
