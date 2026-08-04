@@ -17,7 +17,8 @@ import {
     MessageCircle,
     Bookmark, 
     UserRound,
-    Settings
+    Settings,
+    LogIn
 } from "lucide-react";
 
 const navigationMenu = [
@@ -96,17 +97,22 @@ export function LeftSidebar() {
                 </Button>
             </div>
             
-            <div className="flex gap-2 cursor-pointer
-            p-4 rounded-full 
-            hover:bg-accent duration-150 ">
-                <Avatar size="lg">
+            <div 
+            className="flex gap-4 cursor-pointer items-center
+            p-4 rounded-full text-lg
+            hover:bg-accent duration-150 "
+            onClick={() => navigate("/login")}
+            >
+                {/* <Avatar size="lg">
                     <AvatarImage src="https://github.com/shadcn.png" />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div>
                     <p className="font-semibold">Devin Xie</p>
                     <p className="text-ring text-sm">@dewiin</p>
-                </div>
+                </div> */}
+                <LogIn />
+                <p>Sign In</p>
             </div>
         </div>
     )
