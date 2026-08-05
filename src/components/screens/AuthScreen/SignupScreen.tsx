@@ -33,7 +33,7 @@ export function SignupScreen() {
                     {/* Oauth options */}
                     <Button
                     className="rounded-full cursor-pointer py-6"
-                    variant="default"
+                    variant="secondary"
                     type="button"
                     >
                             <GoogleLogo />
@@ -41,7 +41,7 @@ export function SignupScreen() {
                     </Button>
                     <Button
                     className="rounded-full cursor-pointer py-6"
-                    variant="default"
+                    variant="secondary"
                     type="button"
                     >
                             <GithubLogo />
@@ -75,6 +75,13 @@ export function SignupScreen() {
                             <Eye />
                         </InputGroupAddon>
                     </InputGroup>
+
+                    <Button 
+                    variant="default"
+                    type="submit"
+                    >
+                        Sign up
+                    </Button>
 
                     <p className="w-full text-muted-foreground text-sm text-center">
                             Already have an account?{" "}

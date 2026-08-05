@@ -35,7 +35,7 @@ export function LoginScreen() {
                     {/* Oauth options */}
                     <Button
                     className="rounded-full cursor-pointer py-6"
-                    variant="default"
+                    variant="secondary"
                     type="button"
                     >
                             <GoogleLogo />
@@ -43,7 +43,7 @@ export function LoginScreen() {
                     </Button>
                     <Button
                     className="rounded-full cursor-pointer py-6"
-                    variant="default"
+                    variant="secondary"
                     type="button"
                     >
                             <GithubLogo />
@@ -57,16 +57,7 @@ export function LoginScreen() {
                         <Separator />
                     </div>
 
-                    {/* Local sign up */}
-                    <div className="flex gap-2">
-                        <InputGroup>
-                            <InputGroupInput placeholder="First Name" />
-                        </InputGroup>
-                        <InputGroup>
-                            <InputGroupInput placeholder="Last Name" />
-                        </InputGroup>
-                    </div>
-
+                    {/* Local login */}
                     <InputGroup>
                         <InputGroupInput placeholder="Username" />
                     </InputGroup>
@@ -77,6 +68,13 @@ export function LoginScreen() {
                             <Eye />
                         </InputGroupAddon>
                     </InputGroup>
+
+                    <Button
+                    type="submit"
+                    variant="default"
+                    >
+                        Log in
+                    </Button>
 
                     <p className="w-full text-muted-foreground text-sm text-center">
                             Don't have an account?{" "}
