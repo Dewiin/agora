@@ -1,21 +1,46 @@
 import { useNavigate } from "react-router"
+import { useState } from "react"
+import { useForm, Controller } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import z from "zod"
 import logo from "@/assets/agora_logo.svg"
 
 // components
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { GoogleLogo, GithubLogo } from "@/components/ui/logos"
+import { FieldError } from "@/components/ui/field"
 import {
     InputGroup,
     InputGroupAddon,
     InputGroupInput,
 } from "@/components/ui/input-group"
+import { Input } from "@/components/ui/input"
 
 // icons
 import { Eye, EyeOff } from "lucide-react"
 
+// schemas
+import { signupSchema } from "@/schemas/authSchema"
+
 export function SignupScreen() {
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+
+    const form = useForm<z.infer<typeof signupSchema>>({
+        resolver: zodResolver(signupSchema),
+        defaultValues: {
+            firstName: "",
+            lastName: "",
+            username: "",
+            password: ""
+        },
+        mode: "onChange"
+    });
+
+    async function handleSignup(data: z.infer<typeof signupSchema>) {
+        console.log(data);
+    }
 
     return (
         <div 
@@ -29,6 +54,7 @@ export function SignupScreen() {
                 </p>
                 <form
                 className="flex flex-col gap-4"
+                onSubmit={form.handleSubmit(handleSignup)}
                 >   
                     {/* Oauth options */}
                     <Button
@@ -36,16 +62,16 @@ export function SignupScreen() {
                     variant="secondary"
                     type="button"
                     >
-                            <GoogleLogo />
-                            Continue with Google
+                        <GoogleLogo />
+                        Continue with Google
                     </Button>
                     <Button
                     className="rounded-full cursor-pointer py-6"
                     variant="secondary"
                     type="button"
                     >
-                            <GithubLogo />
-                            Continue with GitHub
+                        <GithubLogo />
+                        Continue with GitHub
                     </Button>
 
                     <div className="flex items-center gap-4 
@@ -56,29 +82,93 @@ export function SignupScreen() {
                     </div>
 
                     {/* Local sign up */}
-                    <div className="flex gap-2">
-                        <InputGroup>
-                            <InputGroupInput placeholder="First Name" />
-                        </InputGroup>
-                        <InputGroup>
-                            <InputGroupInput placeholder="Last Name" />
-                        </InputGroup>
+                    <div className="flex gap-2 *:flex-1">
+                        <Controller
+                        name="firstName"
+                        control={form.control}
+                        render={({field, fieldState, formState}) => (
+                            <div className="flex flex-col gap-2">
+                                <Input 
+                                {...field}
+                                aria-invalid={fieldState.invalid}
+                                placeholder="First Name" 
+                                autoComplete="new-password"
+                                />
+                                {fieldState.invalid && (
+                                    <FieldError errors={[fieldState.error]} />
+                                )}
+                            </div>
+                        )}
+                        />
+                        <Controller
+                        name="lastName"
+                        control={form.control}
+                        render={({field, fieldState, formState}) => (
+                            <div className="flex flex-col gap-2">
+                                <Input 
+                                {...field}
+                                aria-invalid={fieldState.invalid}
+                                placeholder="Last Name" 
+                                autoComplete="new-password"
+                                />
+                                {fieldState.invalid && (
+                                    <FieldError errors={[fieldState.error]} />
+                                )}
+                            </div>
+                        )}
+                        />
                     </div>
 
-                    <InputGroup>
-                        <InputGroupInput placeholder="Username" />
-                    </InputGroup>
+                    <Controller
+                        name="username"
+                        control={form.control}
+                        render={({field, fieldState, formState}) => (
+                            <div className="flex flex-col gap-2">
+                                <Input 
+                                {...field}
+                                aria-invalid={fieldState.invalid}
+                                placeholder="Username" 
+                                autoComplete="new-password"
+                                />
+                                {fieldState.invalid && (
+                                    <FieldError errors={[fieldState.error]} />
+                                )}
+                            </div>
+                        )}
+                    />
 
-                    <InputGroup>
-                        <InputGroupInput type="password" placeholder="Password" />
-                        <InputGroupAddon align="inline-end" className="cursor-pointer">
-                            <Eye />
-                        </InputGroupAddon>
-                    </InputGroup>
+                    <Controller
+                        name="password"
+                        control={form.control}
+                        render={({field, fieldState, formState}) => (
+                            <div className="flex flex-col gap-2">
+                                <InputGroup>
+                                    <InputGroupInput 
+                                    {...field}
+                                    aria-invalid={fieldState.invalid}
+                                    type={showPassword ? "text" : "password"} 
+                                    placeholder="Password" 
+                                    autoComplete="new-password"
+                                    />
+                                    <InputGroupAddon 
+                                    align="inline-end" 
+                                    className="cursor-pointer"
+                                    onClick={() => setShowPassword(prev => !prev)}
+                                    >
+                                        {showPassword ? <Eye /> : <EyeOff />}
+                                    </InputGroupAddon>
+                                </InputGroup>
+                                {fieldState.invalid && (
+                                    <FieldError errors={[fieldState.error]} />
+                                )}
+                            </div>
+                        )}
+                    />
 
                     <Button 
                     variant="default"
                     type="submit"
+                    className="cursor-pointer"
                     >
                         Sign up
                     </Button>
