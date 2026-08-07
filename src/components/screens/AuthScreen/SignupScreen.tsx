@@ -17,6 +17,9 @@ import {
 } from "@/components/ui/input-group"
 import { Input } from "@/components/ui/input"
 
+// hooks
+import { useSignup } from "@/hooks/useSignup"
+
 // icons
 import { Eye, EyeOff } from "lucide-react"
 
@@ -24,8 +27,9 @@ import { Eye, EyeOff } from "lucide-react"
 import { signupSchema } from "@/schemas/authSchema"
 
 export function SignupScreen() {
-    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const navigate = useNavigate();
+    const signupMutation = useSignup();
 
     const form = useForm<z.infer<typeof signupSchema>>({
         resolver: zodResolver(signupSchema),
@@ -39,7 +43,9 @@ export function SignupScreen() {
     });
 
     async function handleSignup(data: z.infer<typeof signupSchema>) {
-        console.log(data);
+        const user = await signupMutation.mutateAsync(data);
+
+        console.log(user);
     }
 
     return (
